@@ -1,2 +1,6 @@
 # Python 3.9.13
 django==4.2
+
+#user: florintile
+#mail: admin@email.com
+#password: python123
