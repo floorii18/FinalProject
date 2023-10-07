@@ -10,21 +10,20 @@
               <div class="circle intro-circle-4"></div>
               <div class="tm-bg-dark content-pad">
                 <h2 class="mb-4 text-center">Soft Skill</h2>
-                <form action="" method="POST">
-                  <div class="mb-3">
-                      <label>Skill</label>
-                        {% csrf_token %}
-                        {{ skillform.as_table }}
-                      <input type="text" class="form-control form-control-lg bg-gray-800 border-dark" id="Description">
-                    </div>
-                    <div class="mb-3">
-                      <label>Level</label>
-                      <input type="text" class="form-control form-control-lg bg-gray-800 border-dark" id="Level">
-                    </div>
-                    <div class="text-center">
+                <form class="row" action="" method="POST">
+                  {% csrf_token %}
+                  <div class="mb-3 text-center">
+                    <label for="id_Description">Skill</label>
+                    {{ skillform.Description }}
+                  </div>
+                  <div class="mb-3 text-center">
+                    <label for="id_Level">Level</label>
+                    {{ skillform.Level }}
+                  </div>
+                  <div class="text-center">
                     <input type="submit" class="btn btn-white btn-xl mb-4" value="Save">
-                    </div>
-              </form>
+                  </div>
+                </form>
               </div>              
             </div>
           </li>

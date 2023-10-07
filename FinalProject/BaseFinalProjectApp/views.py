@@ -1,9 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import SoftSkills, HardSkills
 from .forms import SoftSkillsForm, HardSkillsForm
 
 def Home(request):
-    return render(request, 'home.html')
+    context = {}
+    if request.method == "POST":
+        context = {"FilterSoftSkill" : SoftSkills.objects.filter(Description_icontains = request.POST["search"]),
+                   "FilterSoftSkill" : HardSkills.objects.filter(Description_icontains = request.POST["search"])
+                   } 
+        return redirect("skills")   
+    
+    return render(request, 'home.html', context)
 
 def Experience(request):
    return render(request,'experience.html')
@@ -12,7 +19,11 @@ def Certifications(request):
     return render(request,'certifications.html')
 
 def Skill(request):
-   return render(request,'skills.html')
+   contexto = {
+        "SoftSkills": SoftSkills.objects.all(),
+        "HardSkills": HardSkills.objects.all()
+    }
+   return render(request,'skills.html' , contexto )
 
 def About(request):
     return render(request,'about.html')
@@ -23,29 +34,25 @@ def AddSoftSkill(request):
 def AddHardSkill(request):
    return render(request,'addhardskills.html')
 
-
 def addsoftskill(request):
     if request.method == "POST":
-        form = SoftSkillsForm(request.POST['Description'], request.POST['Level'])
-        print(form)
+        form = SoftSkillsForm(request.POST)
         if form.is_valid():
-            skillinfo = form.cleaned_data
-            skillinfo = SoftSkills(Description=skillinfo['Description'], Level=skillinfo['Level'])
-            skillinfo.save()
-            return render(request,'skills.html')
+            form.save()
+            return redirect('skills')
     else:
-        form = SkillsForm()
-    return render(request,'addsoftskills.html', {'form':form})
+        form = SoftSkillsForm()
+
+    return render(request, 'addsoftskills.html', {'skillform': form})
 
 def addhardskill(request):
     if request.method == "POST":
-        form = HardSkillsForm(request.POST['Description'], request.POST['Level'])
-        print(form)
+        form = HardSkillsForm(request.POST)
         if form.is_valid():
-            skillinfo = form.cleaned_data
-            skillinfo = HardSkills(Description=skillinfo['Description'], Level=skillinfo['Level'])
-            skillinfo.save()
-            return render(request,'skills.html')
+            form.save()
+            return redirect('skills')
     else:
-        form = SkillsForm()
-    return render(request,'addhardskills.html', {'form':form})
+        form = HardSkillsForm()
+
+    return render(request, 'addhardskills.html', {'skillform': form})
+

@@ -7,7 +7,7 @@ urlpatterns = [
     path('experience/', views.Experience, name="experience"),
     path('certifications/', views.Certifications, name="certifications"),
     path('skills/', views.Skill, name="skills"),
-    path('addsoftskills/', views.AddSoftSkill, name="addsoftskills"),
-    path('addhardskills/', views.AddHardSkill, name="addhardskills"),
+    path('addsoftskills/', views.addsoftskill, name="addsoftskills"),
+    path('addhardskills/', views.addhardskill, name="addhardskills"),
     path('about/', views.About, name="about"),
 ]
