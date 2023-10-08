@@ -10,18 +10,18 @@
               <div class="circle intro-circle-4"></div>
               <div class="tm-bg-dark content-pad">
                 <h2 class="mb-4 text-center">Create an account</h2>
-                <ul><div class="text-center">
+                <ul>
                   {% if message %}
                   <p>{{ message }}</p>
                   {% endif %}
                   <form action="" method="POST">
-                    <div class="form-group">
                       {% csrf_token %}
-                        {{ form.as_p }}
-                      </div>                                
+                        {{ form.as_p }} 
+                        <div class="text-center">                             
                       <button type="submit" class="btn btn-primary tm-intro-btn tm-page-link" class="cd-btn">Register</button>
+                    </div>
                     </form>
-                      </div> 
+                       
               </ul>
               </div>              
             </div>

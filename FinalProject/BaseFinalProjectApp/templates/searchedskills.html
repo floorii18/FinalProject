@@ -2,7 +2,7 @@
 
 {% block content %}
 {% load static %}
-          
+  {% if message %}
         <li data-page-no="3" class="px-3">
         <div class="position-relative page-width-1 page-left tm-border-top tm-border-bottom">
             <div class="circle intro-circle-1"></div>
@@ -12,20 +12,46 @@
             <div class="tm-bg-dark content-pad">
             <h2 class="mb-4 text-center">Your result is a Soft Skills</h2>
                 <ul>
-                  {% if message %}
                     <p>{{ message }}</p>
-                  {% else %}
-                    {% for skillinfo in SoftFilter %}
-            
+                  </ul>
+            </div>              
+          </div>
+          </li>
+    {% endif %} {% for skillinfo in SoftFilter %}
+    <li data-page-no="3" class="px-3">
+      <div class="position-relative page-width-1 page-left tm-border-top tm-border-bottom">
+          <div class="circle intro-circle-1"></div>
+          <div class="circle intro-circle-2"></div>
+          <div class="circle intro-circle-3"></div>
+          <div class="circle intro-circle-4"></div>
+          <div class="tm-bg-dark content-pad">
+          <h2 class="mb-4 text-center">Your result is a Soft Skills</h2>
+              <ul>
                 <li>{{ skillinfo }}</li>
                     
-                    {% endfor %}
-                  {% endif %}
-                </ul>
-            </div>              
-        </div>
-        </li>
 
+              </ul>
+          </div>              
+      </div>
+    </li>
+    {% endfor %}
+
+    {% if message %}
+        <li data-page-no="3" class="px-3">
+        <div class="position-relative page-width-1 page-right tm-border-top tm-border-bottom">
+            <div class="circle intro-circle-1"></div>
+            <div class="circle intro-circle-2"></div>
+            <div class="circle intro-circle-3"></div>
+            <div class="circle intro-circle-4"></div>
+            <div class="tm-bg-dark content-pad">
+            <h2 class="mb-4 text-center">Your result is a Hard Skills</h2>
+                <ul>
+                    <p>{{ message }}</p>
+                  </ul>
+            </div>              
+          </div>
+          </li>
+    {% endif %} {% for skillinfo in HardFilter %}
           <li data-page-no="3" class="px-3">
             <div class="position-relative page-width-1 page-right tm-border-top tm-border-bottom">
               <div class="circle intro-circle-1"></div>
@@ -35,18 +61,11 @@
               <div class="tm-bg-dark content-pad">
                 <h2 class="mb-4 text-center">Your result is a Hard Skills</h2>
                 <ul>
-                  {% if message %}
-                    <p>{{ message }}</p>
-                  {% else %}
-                    {% for skillinfo in HardFilter %}
-          
                   <li>{{ skillinfo }}</li>
-                
-                    {% endfor %}
-                  {% endif %}
                 </ul>
               </div>              
             </div>
           </li>
+    {% endfor %}
 
     {% endblock content %}

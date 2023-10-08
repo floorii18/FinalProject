@@ -40,7 +40,7 @@ def register(request):
             return render(request,"home.html" ,  {"message":"User created succesfully"})
 
     else:    
-        form = UserCreationForm()    
+        form = UserRegisterForm()    
 
     return render(request,"signin.html" ,  {"form":form})
 
