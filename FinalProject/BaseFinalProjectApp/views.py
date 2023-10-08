@@ -89,3 +89,45 @@ def deletehardskill(request, hardskills_Description):
     context = {"hardskills" : hardskills}
     
     return render(request, "skills.html", context)
+
+def updatesoftskill(request, softskills_Description):
+    
+    softskills = SoftSkills.objects.get(Description=softskills_Description)
+    
+    if request.method == 'POST':
+        form = SoftSkillsForm(request.POST)
+        print(form)
+        
+        if form.is_valid:
+            information = form.cleaned_data
+            softskills.Description = information['Description']
+            softskills.Level = information['Level']
+            form.save()
+            
+        return render(request, 'skills.html')
+    
+    else:
+        form = SoftSkillsForm(initial={'Description' : softskills.Description, 'Level' : softskills.Level})
+        
+    return render(request, 'updatesoftskill.html', {"form" : form, "softskills_Desciption" : softskills_Description})
+
+def updatehardskill(request, hardskills_Description):
+    
+    hardskills = HardSkills.objects.get(Description=hardskills_Description)
+    
+    if request.method == 'POST':
+        form = HardSkillsForm(request.POST)
+        print(form)
+        
+        if form.is_valid:
+            information = form.cleaned_data
+            hardskills.Description = information['Description']
+            hardskills.Level = information['Level']
+            form.save()
+            
+        return render(request, 'skills.html')
+    
+    else:
+        form = HardSkillsForm(initial={'Description' : hardskills.Description, 'Level' : hardskills.Level})
+        
+    return render(request, 'updatehardskill.html', {"form" : form, "hardskills_Desciption" : hardskills_Description})

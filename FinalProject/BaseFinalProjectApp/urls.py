@@ -12,5 +12,7 @@ urlpatterns = [
     path('about/', views.About, name="about"),
     path('deletesoftskill/<softskills_Description>', views.deletesoftskill, name="deletesoftskill"),
     path('deletehardskill/<hardskills_Description>', views.deletehardskill, name="deletehardskill"),
-    path('searchedskills', views.Skill, name="searchedskills")
+    path('searchedskills', views.Skill, name="searchedskills"),
+    path('updatesoftskill/<softskills_Description>', views.updatesoftskill, name="updatesoftskill"),
+    path('updatehardskill/<hardskills_Description>', views.updatehardskill, name="updatehardskill"),
 ]
