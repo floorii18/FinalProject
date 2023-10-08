@@ -69,10 +69,10 @@ def deletesoftskill(request, softskills_Description):
     return render(request, "skills.html", context)
 
 def deletehardskill(request, hardskills_Description):
-    hardskills = SoftSkills.objects.get(Description=hardskills_Description)
+    hardskills = HardSkills.objects.get(Description=hardskills_Description)
     hardskills.delete()
     
-    hardskills = SoftSkills.objects.all()
+    hardskills = HardSkills.objects.all()
     context = {"hardskills" : hardskills}
     
     return render(request, "skills.html", context)

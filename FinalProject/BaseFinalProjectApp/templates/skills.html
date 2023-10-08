@@ -14,10 +14,9 @@
                 <ul>
                   {% for info in SoftSkills %}
   
-                  <li>{{ info }}</li>
-                  <button style="background-color: transparent; border: none; padding: 0;">
+                  <li>{{ info }}    <button style="background-color: transparent; border: none; padding: 0;">
                     <a href="{% url 'deletesoftskill' info.Description %}">🗑️</a>
-                  </button>
+                  </button></li>
         
                 {% endfor %}
               </ul>
@@ -36,10 +35,9 @@
                       <ul>
                         {% for info in HardSkills %}
         
-                        <li>{{ info }}</li>
-                        <button style="background-color: transparent; border: none; padding: 0;">
+                        <li>{{ info }}    <button style="background-color: transparent; border: none; padding: 0;">
                           <a href="{% url 'deletehardskill' info.Description %}">🗑️</a>
-                        </button>
+                        </button></li>
               
                       {% endfor %}   
               </ul>
