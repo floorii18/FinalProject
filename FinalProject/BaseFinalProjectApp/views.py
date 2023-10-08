@@ -15,18 +15,31 @@ def Certifications(request):
     return render(request,'certifications.html')
 
 def Skill(request):
+    
+    context = {}
+    
     if request.POST:
+        description = request.POST["Description"]
+        SoftFilter = SoftSkills.objects.filter(Description__icontains=description)
+        HardFilter = HardSkills.objects.filter(Description__icontains=description)
 
-        contexto = {"SoftFilter" : SoftSkills.objects.filter( Description__icontains = request.POST["Description"] ),
-                     "HardFilter" : HardSkills.objects.filter( Description__icontains = request.POST["Description"] ) }
-        return render(request,'searchedskills.html' , contexto )
+        if not SoftFilter and not HardFilter:
+            message = "No results found."
+            context = {"message": message}
+        
+        else:
+            message = ""
+            context = {"SoftFilter": SoftFilter,
+                        "HardFilter": HardFilter,
+                        "message": message
+                        }
+        return render(request, 'searchedskills.html', context)
     
     else:
-        contexto = { "SoftSkills" : SoftSkills.objects.all() , 
+        context = { "SoftSkills" : SoftSkills.objects.all() , 
                      "HardSkills" : HardSkills.objects.all() , 
                     }
-
-    return render(request,'skills.html' , contexto )
+        return render(request,'skills.html' , context )
 
 def About(request):
     return render(request,'about.html')

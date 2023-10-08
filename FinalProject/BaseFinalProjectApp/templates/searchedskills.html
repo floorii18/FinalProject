@@ -10,13 +10,17 @@
             <div class="circle intro-circle-3"></div>
             <div class="circle intro-circle-4"></div>
             <div class="tm-bg-dark content-pad">
-            <h2 class="mb-4 text-center">Soft Skills searched</h2>
+            <h2 class="mb-4 text-center">Your result is a Soft Skills</h2>
                 <ul>
-                {% for skillinfo in SoftFilter %}
+                  {% if message %}
+                    <p>{{ message }}</p>
+                  {% else %}
+                    {% for skillinfo in SoftFilter %}
             
                 <li>{{ skillinfo }}</li>
                     
-                {% endfor %}
+                    {% endfor %}
+                  {% endif %}
                 </ul>
             </div>              
         </div>
@@ -29,13 +33,17 @@
               <div class="circle intro-circle-3"></div>
               <div class="circle intro-circle-4"></div>
               <div class="tm-bg-dark content-pad">
-                <h2 class="mb-4 text-center">Hard Skills searched</h2>
+                <h2 class="mb-4 text-center">Your result is a Hard Skills</h2>
                 <ul>
-                  {% for skillinfo in HardFilter %}
+                  {% if message %}
+                    <p>{{ message }}</p>
+                  {% else %}
+                    {% for skillinfo in HardFilter %}
           
                   <li>{{ skillinfo }}</li>
                 
-                  {% endfor %}
+                    {% endfor %}
+                  {% endif %}
                 </ul>
               </div>              
             </div>
