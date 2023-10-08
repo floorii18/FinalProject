@@ -10,23 +10,18 @@
               <div class="circle intro-circle-4"></div>
               <div class="tm-bg-dark content-pad">
                 <h2 class="mb-4 text-center">Create an account</h2>
-                <ul>
-                    <form class="row" method="post">
-                        <div class="col-12">
-                        <div class="mb-3 text-center">
-                          <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            {% csrf_token %}
-                          <input type="email" class="form-control form-control-lg bg-gray-800 border-dark" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3 text-center">
-                          <label for="exampleInputPassword1" class="form-label">Password</label>
-                          <input type="password" class="form-control form-control-lg bg-gray-800 border-dark" id="exampleInputPassword1">
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary tm-intro-btn tm-page-link">Submit</button>
-                        </div>
-                      </div>
-                      </form>
+                <ul><div class="text-center">
+                  {% if message %}
+                  <p>{{ message }}</p>
+                  {% endif %}
+                  <form action="" method="POST">
+                    <div class="form-group">
+                      {% csrf_token %}
+                        {{ form.as_p }}
+                      </div>                                
+                      <button type="submit" class="btn btn-primary tm-intro-btn tm-page-link" class="cd-btn">Register</button>
+                    </form>
+                      </div> 
               </ul>
               </div>              
             </div>
