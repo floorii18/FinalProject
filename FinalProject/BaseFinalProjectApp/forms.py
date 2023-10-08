@@ -15,3 +15,15 @@ class HardSkillsForm(forms.ModelForm):
         model = HardSkills
 	#Aquí tenemos que pasar todas las variables con las que cuenta nuestro modelo.
         fields = ['Description', 'Level']
+        
+class SoftSkillSearch(forms.ModelForm):
+
+    class Meta:
+        model = SoftSkills
+        fields = ["Description"]
+        
+class HardSkillSearch(forms.ModelForm):
+
+    class Meta:
+        model = HardSkills
+        fields = ["Description"]

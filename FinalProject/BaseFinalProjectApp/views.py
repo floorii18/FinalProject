@@ -1,16 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import SoftSkills, HardSkills
-from .forms import SoftSkillsForm, HardSkillsForm
+from .forms import *
 
 def Home(request):
-    context = {}
-    if request.method == "POST":
-        context = {"FilterSoftSkill" : SoftSkills.objects.filter(Description_icontains = request.POST["search"]),
-                   "FilterSoftSkill" : HardSkills.objects.filter(Description_icontains = request.POST["search"])
-                   } 
-        return redirect("skills")   
-    
-    return render(request, 'home.html', context)
+    contexto = { "form" :  SoftSkillSearch(),
+                 "form" : HardSkillSearch()
+                 }       
+    return render(request, 'home.html' , contexto)
 
 def Experience(request):
    return render(request,'experience.html')
@@ -19,11 +15,18 @@ def Certifications(request):
     return render(request,'certifications.html')
 
 def Skill(request):
-   contexto = {
-        "SoftSkills": SoftSkills.objects.all(),
-        "HardSkills": HardSkills.objects.all()
-    }
-   return render(request,'skills.html' , contexto )
+    if request.POST:
+
+        contexto = {"SoftFilter" : SoftSkills.objects.filter( Description__icontains = request.POST["Description"] ),
+                     "HardFilter" : HardSkills.objects.filter( Description__icontains = request.POST["Description"] ) }
+        return render(request,'searchedskills.html' , contexto )
+    
+    else:
+        contexto = { "SoftSkills" : SoftSkills.objects.all() , 
+                     "HardSkills" : HardSkills.objects.all() , 
+                    }
+
+    return render(request,'skills.html' , contexto )
 
 def About(request):
     return render(request,'about.html')
@@ -56,3 +59,20 @@ def addhardskill(request):
 
     return render(request, 'addhardskills.html', {'skillform': form})
 
+def deletesoftskill(request, softskills_Description):
+    softskills = SoftSkills.objects.get(Description=softskills_Description)
+    softskills.delete()
+    
+    softskills = SoftSkills.objects.all()
+    context = {"softskills" : softskills}
+    
+    return render(request, "skills.html", context)
+
+def deletehardskill(request, hardskills_Description):
+    hardskills = SoftSkills.objects.get(Description=hardskills_Description)
+    hardskills.delete()
+    
+    hardskills = SoftSkills.objects.all()
+    context = {"hardskills" : hardskills}
+    
+    return render(request, "skills.html", context)

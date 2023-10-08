@@ -10,4 +10,7 @@ urlpatterns = [
     path('addsoftskills/', views.addsoftskill, name="addsoftskills"),
     path('addhardskills/', views.addhardskill, name="addhardskills"),
     path('about/', views.About, name="about"),
+    path('deletesoftskill/<softskills_Description>', views.deletesoftskill, name="deletesoftskill"),
+    path('deletehardskill/<hardskills_Description>', views.deletehardskill, name="deletehardskill"),
+    path('searchedskills', views.Skill, name="searchedskills")
 ]

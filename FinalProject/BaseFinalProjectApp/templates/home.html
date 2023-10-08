@@ -16,7 +16,7 @@
                       No problem, me neither! 👀 </p>
                 </div>
                 <div class="intro-right">
-                  <img src="{% static 'img/home.png' %}" alt="Image" class="img-fluid intro-img-1">
+                  <img src="https://i.postimg.cc/26YmBvV4/Photo-Room-20231008-003038.png" alt="Image" class="img-fluid intro-img-1">
                 </div>
                 <div class="circle intro-circle-1"></div>
                 <div class="circle intro-circle-2"></div>
@@ -35,14 +35,15 @@
               <div class="tm-bg-dark content-pad">
                       <h2 class="mb-4 text-center">Are you looking for something specific?</h2>
                       <ul><div class="text-center">
-                        <form id="search-form">
+                        <form id="search-form" action = "{% url 'skills' %}" method="post">
                           <i class="fa fa-cogs tm-slide-icon"></i>
                           <div class="form-group">
-                              <input name="search" type="text" class="form-control center-block tm-max-w-400" id="input1">
-                        </div>                                
+                            {% csrf_token %}
+                              {{ form.as_p }}
+                          </div>                                
                           <button type="submit" class="btn btn-primary tm-intro-btn tm-page-link" class="cd-btn">Search</button>
-                      </form>
-                    </div> 
+                        </form>
+                          </div> 
                       </ul>
               </div>              
             </div>
