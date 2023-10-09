@@ -23,7 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-oya$$y^e=+c^qj$a-a!fnfes^w0l10wih9*eth0t0*()&80-8w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+DISABLE_COLLECTSTATIC = os.getenv('DISABLE_COLLECTSTATIC', '0') == '1'
 
 ALLOWED_HOSTS = []
 
