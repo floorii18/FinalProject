@@ -17,6 +17,7 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
+$ heroku config:set DISABLE_COLLECTSTATIC=1
 
 if __name__ == '__main__':
     main()
