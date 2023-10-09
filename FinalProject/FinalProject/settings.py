@@ -28,6 +28,8 @@ DEBUG = False
 
 DISABLE_COLLECTSTATIC = os.getenv('DISABLE_COLLECTSTATIC', '0') == '1'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 ALLOWED_HOSTS = []
 
 
