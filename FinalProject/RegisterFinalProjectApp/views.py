@@ -15,16 +15,16 @@ def login_request(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('email')
+            username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            user = authenticate(request, email=email, password=password)
+            user = authenticate(request, username=username, password=password) 
             if user is not None:
                 login(request, user)
-                return render(request,'home.html', {"message":f"Welcome"})
+                return render(request, 'home.html', {"message": f"Welcome"})
             else:
-                return render(request, 'login.html', {"message":f"Some of your information is incorrect"})
+                return render(request, 'login.html', {"message": "Some of your information is incorrect"})
         else:
-            return render(request, 'login.html', {"message":f"ERROR, invalid form"})
+            return render(request, 'login.html', {"message": "ERROR, invalid form"})
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
@@ -46,62 +46,37 @@ def register(request):
 
 @login_required
 def updateprofile(request):
-
-    Users = request.user
+    user = request.user
 
     if request.method == 'POST':
-
-        form = MyUserEditForm(request.POST, request.FILES)
-
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
-            
-            information = form.cleaned_data
-            Users.email = information['email']
-            Users.password1 = information['password1']
-            Users.password2 = information['password2']
-            Users.last_name = information['last_name']
-            Users.first_name = information['first_name']
-            Users.save()
+            user.email = form.cleaned_data['email']
+            user.last_name = form.cleaned_data['last_name']
+            user.first_name = form.cleaned_data['first_name']
+            user.save()
 
-            form.save()
-            # perfil.avatar = archivo_form.cleaned_data["avatar"]
-            #perfil.save()
+            # Actualiza el avatar
+            avatar = Avatar.objects.get(user=user)
+            avatar.image = form.cleaned_data['avatar']
+            avatar.save()
 
-            user = User.objects.get(username=request.user)
-            avat = Avatar.objects.get(user=user)
-            print(f"\n\n{form.cleaned_data}\n\n")
-            avat.image = form.cleaned_data["avatar"]
-            print(f"\n\n{avat.image.url}\n\n")
-            print(f"\n\n{avat.image.path}\n\n")
-            # avatar = Avatar(user=user, imagen=archivo_form.cleaned_data["avatar"])
-            avat.save()
-
-            # archivo_form.save()
-
-
-            return render(request, "AppCoder/index.html")
+            return render(request, "home.html")
         else:
-            form = MyUserEditForm()
-
+            return render(request, "updateprofile.html", {"form": form, "Users": user})
     else:
-        form = MyUserEditForm(
+        form = UserRegisterForm(
             initial={
-                'email': Users.email,
-                'last_name': Users.last_name,
-                'first_name': Users.first_name
+                'email': user.email,
+                'last_name': user.last_name,
+                'first_name': user.first_name
             }
         )
-    return render(
-        request,
-        "users/updateprofile.html",
-        {
-            "form": form,
-            "Users": Users
-        }
-    )
+    return render(request, "updateprofile.html", {"form": form, "Users": user})
+
 
 class ChangePasswordView(LoginRequiredMixin, View):
-    template_name = "cambiar_pass.html"
+    template_name = "changepass.html"
     form_class = ChangePasswordForm
     success_url = reverse_lazy("home")
 
