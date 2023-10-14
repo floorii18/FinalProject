@@ -6,7 +6,9 @@ urlpatterns = [
     path('login', views.login_request, name="login"),
     path('signin', views.register, name="signin"),
     path('', include('BaseFinalProjectApp.urls')),
-    path('logout', LogoutView.as_view(template_name='users/logout.html'), name="Logout"),
-    path('updateuser', views.updateprofile, name="updateprofile"),
-    path('changepass/', views.ChangePasswordView.as_view(), name="ChangePass"),
+    path('logout', views.logout, name="logout"),
+    path('updateuser', views.updateprofile, name="updateuser"),
+    path('changepass', views.ChangePasswordView.as_view(), name="changepass"),
+    path('logout', views.logout_request, name="logout"),
+    path('profile', views.profile, name="profile"),
 ]

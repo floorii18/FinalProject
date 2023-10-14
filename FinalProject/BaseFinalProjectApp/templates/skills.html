@@ -14,12 +14,12 @@
                 <ul>
                   {% for info in SoftSkills %}
   
-                  <li>{{ info }}    <button style="background-color: transparent; border: none; padding: 0;">
+                  <li>{{ info }}   {% if user.is_superuser %} <button style="background-color: transparent; border: none; padding: 0;">
                     <a href="{% url 'addsoftskills' %}" style="text-decoration: none;">
                       <img src="https://i.postimg.cc/htsSPSLt/Photo-Room-20231008-152508.png" alt="" width="25" height="25"></a>
                     <a href="{% url 'updatesoftskill' info.Description %}">✏️</a>
                     <a href="{% url 'deletesoftskill' info.Description %}">🗑️</a>
-                  </button></li>
+                  </button>{% endif %}</li>
         
                 {% endfor %}
               </ul>
@@ -38,12 +38,12 @@
                       <ul>
                         {% for info in HardSkills %}
         
-                        <li>{{ info }}    <button style="background-color: transparent; border: none; padding: 0;">
+                        <li>{{ info }}   {% if user.is_superuser %} <button style="background-color: transparent; border: none; padding: 0;">
                           <a href="{% url 'addhardskills' %}" style="text-decoration: none;">
                             <img src="https://i.postimg.cc/htsSPSLt/Photo-Room-20231008-152508.png" alt="" width="25" height="25"></a>
                           <a href="{% url 'updatehardskill' info.Description %}">✏️</a>
                           <a href="{% url 'deletehardskill' info.Description %}">🗑️</a>
-                        </button></li>
+                        </button>{% endif %}</li>
               
                       {% endfor %}   
               </ul>

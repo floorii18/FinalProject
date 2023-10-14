@@ -36,17 +36,37 @@
                         <div class="circle"></div>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="{% url 'experience' %}" data-no="2">Experience</a>
+                        <a class="nav-link" href="{% url 'experience' %}" data-no="3">Experience</a>
                         <div class="circle"></div>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="{% url 'about' %}" data-no="3">About</a>
+                        <a class="nav-link" href="{% url 'about' %}" data-no="4">About</a>
                         <div class="circle"></div>
-                      </li>
+                      </li>{% if user.is_authenticated %}
                       <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}" data-no="4">Login</a>
+                        <a class="nav-link" href="{% url 'about' %}" data-no="5">Contact</a>
                         <div class="circle"></div>
                       </li>
+                      {% endif %}
+                      {% if user.is_authenticated %}
+                      <li class="nav-item">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-secondary dropdown-toggle transparent-btn" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="background: none; border: none;">
+                            <img src="{% static 'FinalProject/media/avatars/generico.png' %}" width="30" height="30" class="avatar-img">
+                            {{ user.username }}
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-lg-end transparent-bg" style="background: none; border: none;">
+                            <li><a class="dropdown-item" type="button" href="{% url 'profile' %}">Profile</a></li>
+                            <li><a class="dropdown-item" type="button" href="{% url 'logout' %}">Logout</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                      {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}" data-no="5">Login</a>
+                        <div class="circle"></div>
+                      </li>
+                      {% endif %}
                     </ul>
                   </div>
               </nav>
@@ -62,7 +82,7 @@
     <div class="container-fluid">
       <footer class="row mx-auto tm-footer">
         <div class="col-md-6 px-0">
-          Copyright 2023 Florencia Intile. All rights reserved.
+          Copyright © Florencia Intile 2023. All rights reserved.
         </div>
         <div class="col-md-6 px-0 tm-footer-right">
           Designed by <a rel="sponsored" href="https://www.linkedin.com/in/florenciaintile/" target="_blank" class="tm-link-white">Florencia Intile</a>

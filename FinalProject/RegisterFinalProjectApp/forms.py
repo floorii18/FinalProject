@@ -20,6 +20,7 @@ class UserEditForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['email', 'last_name', 'first_name', 'avatar']
+        help_text = {k: "" for k in fields}
 
 
 class AvatarForm(forms.Form):
@@ -36,6 +37,7 @@ class MyUserEditForm(forms.Form):
     class Meta:
         model = User
         fields = ['email', 'last_name', 'first_name', 'avatar']
+        help_text = {k: "" for k in fields}
 
 
 class ChangePasswordForm(forms.Form):

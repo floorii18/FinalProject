@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% load static %}
+{% if user.is_authenticated %}
+<div class="container-fluid tm-content-container">
+    <ul class="cd-hero-slider mb-0 py-5">
+      <li class="px-3" data-page-no="1">
+        <div class="page-width-1 page-left">
+          <div class="d-flex position-relative tm-border-top tm-border-bottom intro-container">
+            <div class="intro-left tm-bg-dark">
+            <h2 class="mb-4 text-center">Neguen Seguridad S.R.L</h2>
+            <h2 class="mb-4 text-center">March 2017 - September 2021</h2>
+            <ul>
+              <p class="lead text-secondary text-center">➾Efficiently managed administrative tasks such as data entry, filing, and documentation to ensure smooth and organized operations</p>
+  
+              <p class="lead text-secondary text-center">➾Developed and maintained comprehensive filing systems for client records, personnel information, and financial documents, enabling easy access and retrieval of information</p>
+                  
+              <p class="lead text-secondary text-center">➾Effectively communicated with clients, employees, and external stakeholders, providing prompt and accurate responses to inquiries, scheduling appointments, and coordinating meetings</p>
+                  
+              <p class="lead text-secondary text-center">➾Maintained inventory and ordered necessary office supplies, equipment, and uniforms, ensuring availability and functionality for the security staff</p>
+                  
+              <p class="lead text-secondary text-center">➾Processed payroll information, tracked attendance records, and collaborated with the HR department to address any personnel-related matters</p>
+                  
+              <p class="lead text-secondary text-center">➾Participated in team meetings, providing input and suggestions for process improvements and contributing to a positive work environment</p>
+                  
+              <p class="lead text-secondary text-center">➾Proactively identified opportunities to streamline administrative processes and implemented solutions to optimize workflow and reduce operational costs</p>
+              
+              <button style="background-color: transparent; border: none; padding: 0;">
+                <a href="{% url 'experience' %}" style="text-decoration: none;">
+                 Go back</a>
+              </button>
+            </div>   
+          <div class="intro-right">
+            <img src="https://i.postimg.cc/75ytpFM0/Neguen.png" alt="" width="100" height="100">
+          </div>         
+          <div class="circle intro-circle-1"></div>
+          <div class="circle intro-circle-2"></div>
+          <div class="circle intro-circle-3"></div>
+          <div class="circle intro-circle-4"></div> 
+        </div>
+      </li>
+    </ul>
+  </div>
+
+{% else %}
+<div class="container-fluid tm-content-container">
+    <ul class="cd-hero-slider mb-0 py-5">
+      <li class="px-3" data-page-no="1">
+        <div class="page-width-1 page-left">
+          <div class="d-flex position-relative tm-border-top tm-border-bottom intro-container">
+            <div class="intro-left tm-bg-dark">
+            <h2 class="mb-4 text-center">Neguen Seguridad S.R.L</h2>
+            <ul>
+                <p class="lead text-secondary text-center">You need to log in to gain access to this information.</p>
+                
+                <button style="background-color: transparent; border: none; padding: 0;">
+                    <a href="{% url 'experience' %}" style="text-decoration: none;">
+                     Go back</a>
+                  </button>   
+            </div>  
+            <div class="intro-right">
+                <img src="https://i.postimg.cc/75ytpFM0/Neguen.png" alt="" width="100" height="100">
+              </div>         
+              <div class="circle intro-circle-1"></div>
+              <div class="circle intro-circle-2"></div>
+              <div class="circle intro-circle-3"></div>
+              <div class="circle intro-circle-4"></div> 
+            </div>
+          </li>
+        </ul>
+      </div>
+{% endif %}
+{% endblock content %}

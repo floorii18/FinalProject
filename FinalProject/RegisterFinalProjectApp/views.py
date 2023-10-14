@@ -20,7 +20,7 @@ def login_request(request):
             user = authenticate(request, username=username, password=password) 
             if user is not None:
                 login(request, user)
-                return render(request, 'home.html', {"message": f"Welcome"})
+                return render(request, 'home.html', {"message": f"Welcome {username}"})
             else:
                 return render(request, 'login.html', {"message": "Some of your information is incorrect"})
         else:
@@ -57,6 +57,7 @@ def updateprofile(request):
             user.save()
 
             # Actualiza el avatar
+            user=User.objects.get(username=request.user)
             avatar = Avatar.objects.get(user=user)
             avatar.image = form.cleaned_data['avatar']
             avatar.save()
@@ -96,3 +97,12 @@ class ChangePasswordView(LoginRequiredMixin, View):
                 Users.set_password(pass1)
                 Users.save()
                 return render(request, "home.html")
+ 
+@login_required           
+def logout_request(request):
+    logout(request)
+    return render(request,'logout.html')
+
+@login_required
+def profile(request):
+    return render(request,'profile.html')

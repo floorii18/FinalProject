@@ -11,6 +11,15 @@ def Home(request):
 def Experience(request):
    return render(request,'experience.html')
 
+def Halo(request):
+    return render(request, 'Halo.html')
+
+def Canelos(request):
+    return render(request, 'Canelos.html')
+
+def Neguen(request):
+    return render(request, 'Neguen.html')
+
 def Certifications(request):
     return render(request,'certifications.html')
 

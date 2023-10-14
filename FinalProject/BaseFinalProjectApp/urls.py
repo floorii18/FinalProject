@@ -15,4 +15,7 @@ urlpatterns = [
     path('searchedskills', views.Skill, name="searchedskills"),
     path('updatesoftskill/<softskills_Description>', views.updatesoftskill, name="updatesoftskill"),
     path('updatehardskill/<hardskills_Description>', views.updatehardskill, name="updatehardskill"),
+    path('halo/', views.Halo, name="halo"),
+    path('canelos/', views.Canelos, name="canelos"),
+    path('neguen/', views.Neguen, name="neguen"),
 ]
