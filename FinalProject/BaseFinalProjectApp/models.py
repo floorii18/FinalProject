@@ -13,3 +13,9 @@ class HardSkills(models.Model):
     
     def __str__(self):
         return f" {self.Description} - Level: {self.Level}"
+    
+class ContactForm(models.Model):
+    subject = models.CharField(max_length=100)
+    message = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    response = models.TextField(blank=True, null=True)

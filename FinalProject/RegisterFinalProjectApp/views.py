@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -101,7 +101,7 @@ class ChangePasswordView(LoginRequiredMixin, View):
 @login_required           
 def logout_request(request):
     logout(request)
-    return render(request,'logout.html')
+    return redirect('logout')
 
 @login_required
 def profile(request):

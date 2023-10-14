@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
     
 class User(AbstractUser):
     email = models.EmailField(unique=True)
+    username = models.CharField(max_length=150, unique=True, default='default_value')
 
     groups = models.ManyToManyField(
         'auth.Group',
@@ -24,7 +25,7 @@ class User(AbstractUser):
     )
     
 class Avatar(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)  # Usar User personalizado
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to='avatars', null=True, blank=True)
 
     @property

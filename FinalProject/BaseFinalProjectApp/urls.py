@@ -18,4 +18,5 @@ urlpatterns = [
     path('halo/', views.Halo, name="halo"),
     path('canelos/', views.Canelos, name="canelos"),
     path('neguen/', views.Neguen, name="neguen"),
+    path('contact/', views.contact_view, name="contact"),
 ]

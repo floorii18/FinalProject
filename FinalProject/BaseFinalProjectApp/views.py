@@ -140,3 +140,14 @@ def updatehardskill(request, hardskills_Description):
         form = HardSkillsForm(initial={'Description' : hardskills.Description, 'Level' : hardskills.Level})
         
     return render(request, 'updatehardskill.html', {"form" : form, "hardskills_Desciption" : hardskills_Description})
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactFormModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('contactme')
+    else:
+        form = ContactFormModelForm()
+    
+    return render(request, 'contact.html', {'form': form})
