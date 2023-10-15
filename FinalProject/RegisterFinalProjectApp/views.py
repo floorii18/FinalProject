@@ -97,11 +97,6 @@ class ChangePasswordView(LoginRequiredMixin, View):
                 Users.set_password(pass1)
                 Users.save()
                 return render(request, "home.html")
- 
-@login_required           
-def logout_request(request):
-    logout(request)
-    return redirect('logout')
 
 @login_required
 def profile(request):

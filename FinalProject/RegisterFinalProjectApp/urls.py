@@ -9,6 +9,6 @@ urlpatterns = [
     path('logout', views.logout, name="logout"),
     path('updateuser', views.updateprofile, name="updateuser"),
     path('changepass', views.ChangePasswordView.as_view(), name="changepass"),
-    path('logout', views.logout_request, name="logout"),
+     path('logout/', LogoutView.as_view(template_name='RegisterFinalProjectApp/templates/logout.html'), name="logout"),
     path('profile', views.profile, name="profile"),
 ]
