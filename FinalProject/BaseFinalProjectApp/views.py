@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import SoftSkills, HardSkills
 from .forms import *
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView
 
 def Home(request):
     contexto = { "form" :  SoftSkillSearch(),
@@ -141,13 +144,12 @@ def updatehardskill(request, hardskills_Description):
         
     return render(request, 'updatehardskill.html', {"form" : form, "hardskills_Desciption" : hardskills_Description})
 
-def contact_view(request):
-    if request.method == 'POST':
-        form = ContactFormModelForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('contactme')
-    else:
-        form = ContactFormModelForm()
+class contact_view(LoginRequiredMixin, CreateView):
+    model = ContactForm
+    form_class = ContactFormModelForm
+    success_url = reverse_lazy('contact')
+    template_name = 'contact.html'
     
-    return render(request, 'contact.html', {'form': form})
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(contact_view).form_valid(form)

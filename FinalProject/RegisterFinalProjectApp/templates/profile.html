@@ -13,11 +13,8 @@
               <div class="tm-bg-dark content-pad">
                 <h2 class="mb-4 text-center">Your information</h2>
                 <ul>
-                  {% for items in User %}
-  
-                  <li>{{ items }}</li>
-        
-                {% endfor %}
+                  <p class="lead text-center">Username: {{user.username}}</p>
+                  <p class="lead text-center">Email: {{user.email}}</p>
                 <li><button style="background-color: transparent; border: none; padding: 0;">
                     <a href="{% url 'updateuser' %}" style="text-decoration: none;">
                      Change information</a>

@@ -27,19 +27,6 @@ class AvatarForm(forms.Form):
     avatar = forms.FileField()
 
 
-class MyUserEditForm(forms.Form):
-    # Obligatorios
-    email = forms.EmailField(label="Ingrese su email:")
-    last_name = forms.CharField()
-    first_name = forms.CharField()
-    avatar = forms.FileField()
-
-    class Meta:
-        model = User
-        fields = ['email', 'last_name', 'first_name', 'avatar']
-        help_text = {k: "" for k in fields}
-
-
 class ChangePasswordForm(forms.Form):
     password1 = forms.CharField(label="Insert again your password", widget=forms.PasswordInput())
     password2 = forms.CharField(label="Insert again your password", widget=forms.PasswordInput())

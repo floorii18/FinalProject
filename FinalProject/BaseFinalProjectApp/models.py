@@ -16,6 +16,6 @@ class HardSkills(models.Model):
     
 class ContactForm(models.Model):
     subject = models.CharField(max_length=100)
-    message = models.TextField()
+    message = models.TextField(blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
     response = models.TextField(blank=True, null=True)

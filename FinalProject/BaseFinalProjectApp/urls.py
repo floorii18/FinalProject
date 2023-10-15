@@ -1,5 +1,6 @@
 from django.urls import path
 from BaseFinalProjectApp import views
+from .views import *
 
 urlpatterns = [
     path('', views.Home, name=""),
@@ -18,5 +19,5 @@ urlpatterns = [
     path('halo/', views.Halo, name="halo"),
     path('canelos/', views.Canelos, name="canelos"),
     path('neguen/', views.Neguen, name="neguen"),
-    path('contact/', views.contact_view, name="contact"),
+    path('contact/', contact_view.as_view(), name="contact"),
 ]

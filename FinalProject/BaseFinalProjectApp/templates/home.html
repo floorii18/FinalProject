@@ -6,7 +6,10 @@
             <div class="page-width-1 page-left">
               <div class="d-flex position-relative tm-border-top tm-border-bottom intro-container">
                 <div class="intro-left tm-bg-dark">
-                  <h2 class="mb-4 text-center">Welcome to my Portfolio!</h2>
+                  <h2 class="mb-4 text-center">{% if user.is_authenticated %}
+                    <h2 class="mb-4 text-center">Welcome {{ user.username }} to my Portfolio!</h2>
+                    {% else %}
+                    <h2 class="mb-4 text-center">Welcome to my Portfolio!</h2>{% endif %}
                     <p class="lead text-secondary text-center"> 
                       I'm some sort of Data Analyst working with variables, contracts, Django web and the so called
               Python...in the IT. </p>

@@ -101,3 +101,8 @@ class ChangePasswordView(LoginRequiredMixin, View):
 @login_required
 def profile(request):
     return render(request,'profile.html')
+
+@login_required           
+def logout_request(request):
+    logout(request)
+    return render (request, 'logout.html')
