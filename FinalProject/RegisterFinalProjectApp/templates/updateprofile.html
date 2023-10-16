@@ -12,10 +12,10 @@
               <div class="tm-bg-dark content-pad">
                 <h2 class="mb-4 text-center">Update your information</h2>
                 <ul><div class="text-center">
-                  <form action="" method="POST">
+                  <form action="" method="POST" enctype="multipart/form-data">
                       {% csrf_token %}
                         {{ form.as_p }}
-                        {{ AvatarForm.as_p }}                                
+                        {{ avatarform.as_p }}                               
                       <button type="submit" class="btn btn-primary tm-intro-btn tm-page-link" class="cd-btn">Save</button>
                     </form>
                       </div> 

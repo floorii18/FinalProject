@@ -4,11 +4,13 @@ from .forms import *
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
+from RegisterFinalProjectApp.models import Avatar
 
 def Home(request):
     contexto = { "form" :  SoftSkillSearch(),
                  "form" : HardSkillSearch()
-                 }       
+                 } 
+    avatars = Avatar.objects.filter(user=request.user.id)      
     return render(request, 'home.html' , contexto)
 
 def Experience(request):

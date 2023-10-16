@@ -20,7 +20,7 @@ def login_request(request):
             user = authenticate(request, username=username, password=password) 
             if user is not None:
                 login(request, user)
-                return render(request, 'home.html', {"message": f"Welcome {username}"})
+                return redirect('home')
             else:
                 return render(request, 'login.html', {"message": "Some of your information is incorrect"})
         else:
@@ -37,7 +37,7 @@ def register(request):
 
             username = form.cleaned_data['username']
             form.save()
-            return render(request,"home.html" ,  {"message":"User created succesfully"})
+            return redirect('login')
 
     else:    
         form = UserRegisterForm()    
@@ -56,12 +56,6 @@ def updateprofile(request):
             user.first_name = form.cleaned_data['first_name']
             user.save()
 
-            # Actualiza el avatar
-            user=User.objects.get(username=request.user)
-            avatar = Avatar.objects.get(user=user)
-            avatar.image = form.cleaned_data['avatar']
-            avatar.save()
-
             return render(request, "home.html")
         else:
             return render(request, "updateprofile.html", {"form": form, "Users": user})
@@ -75,6 +69,19 @@ def updateprofile(request):
         )
     return render(request, "updateprofile.html", {"form": form, "Users": user})
 
+
+@login_required
+def ChangeAvatar(request):
+    if request.method == 'POST':
+        avatarform = AvatarForm(request.POST, request.FILES)
+        if avatarform.is_valid:
+            u =User.objects.get(username=request.user)
+            avatar = Avatar (user=u, image=form.cleaned_data['image'])
+            avatar.save()
+            return redirect('home')
+    else:
+        form = AvatarForm()
+    return redirect('updateuser')
 
 class ChangePasswordView(LoginRequiredMixin, View):
     template_name = "changepass.html"
@@ -96,7 +103,7 @@ class ChangePasswordView(LoginRequiredMixin, View):
             if pass1 == pass2:
                 Users.set_password(pass1)
                 Users.save()
-                return render(request, "home.html")
+                return redirect('home')
 
 @login_required
 def profile(request):
