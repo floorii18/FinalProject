@@ -16,7 +16,7 @@
                   <p class="lead text-secondary text-center">Name: </p><p class="lead text-center">{{user.first_name}} {{user.last_name}}</p>
                   <p class="lead text-secondary text-center">Username: </p><p class="lead text-center">{{user.username}}</p>
                   <p class="lead text-secondary text-center">Email: </p><p class="lead text-center">{{user.email}}</p>
-                  <p class="lead text-secondary text-center">Avatar: </p><p class="lead text-center"><img src="{{url}}" width="30" height="30" class="avatar-img"></p>
+                  <p class="lead text-secondary text-center">Avatar: </p><p class="lead text-center"><img src="{{avatar_url}}" width="40" height="40" class="avatar-img"></p>
                 <li><button style="background-color: transparent; border: none; padding: 0;">
                     <a href="{% url 'updateuser' %}" style="text-decoration: none;">
                      Change information</a>
