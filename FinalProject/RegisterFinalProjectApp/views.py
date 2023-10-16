@@ -71,17 +71,19 @@ def updateprofile(request):
 
 
 @login_required
-def ChangeAvatar(request):
+def update_avatar(request):
     if request.method == 'POST':
-        avatarform = AvatarForm(request.POST, request.FILES)
-        if avatarform.is_valid:
-            u =User.objects.get(username=request.user)
-            avatar = Avatar (user=u, image=form.cleaned_data['image'])
-            avatar.save()
-            return redirect('home')
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            avatar = Avatar.objects.get_or_create(user=request.user)[0]
+            new_image = form.cleaned_data["image"]
+            if new_image:
+                avatar.image = new_image
+                avatar.save()
+            return redirect('profile')
     else:
         form = AvatarForm()
-    return redirect('updateuser')
+    return render(request, 'changeavatar.html', {'form': form})
 
 class ChangePasswordView(LoginRequiredMixin, View):
     template_name = "changepass.html"

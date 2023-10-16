@@ -25,8 +25,10 @@ class UserEditForm(UserCreationForm):
         fields = ['email', 'last_name', 'first_name', 'password1', 'password2']
 
 
-class AvatarForm(forms.Form):
-    avatar = forms.FileField()
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ["image"]
 
 
 class ChangePasswordForm(forms.Form):
