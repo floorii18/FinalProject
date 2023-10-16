@@ -7,10 +7,10 @@ from django.views.generic.edit import CreateView
 from RegisterFinalProjectApp.models import Avatar
 
 def Home(request):
+
     contexto = { "form" :  SoftSkillSearch(),
-                 "form" : HardSkillSearch()
-                 } 
-    avatars = Avatar.objects.filter(user=request.user.id)      
+                 "form" : HardSkillSearch(),} 
+      
     return render(request, 'home.html' , contexto)
 
 def Experience(request):
