@@ -151,7 +151,7 @@ class contact_view(LoginRequiredMixin, CreateView):
     form_class = ContactFormModelForm
     success_url = reverse_lazy('contact')
     template_name = 'contact.html'
-    
+
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(contact_view).form_valid(form)
+        return super().form_valid(form)

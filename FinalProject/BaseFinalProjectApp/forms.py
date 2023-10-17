@@ -29,6 +29,6 @@ class HardSkillSearch(forms.ModelForm):
         fields = ["Description"]
         
 class ContactFormModelForm(forms.ModelForm):
-    class Meta:
+     class Meta:
         model = ContactForm
-        fields = ['subject', 'message']
+        fields = ['name', 'email', 'subject', 'message']
