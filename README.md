@@ -1,38 +1,42 @@
 # Final Project Coder House - Python
-## Comisión: 47770
-**Alumno: Florencia Intile**
-Project Name
+## Commision: 47770
+**Student: Florencia Intile**
+
+Project Name:
 *My Portofolio*
 ---
 Version
 1.0
 ---
-### Proyect description
-Página Web destinada a usuarios que deseen vender o permutar instrumentos musicales.
+### Project description
+This page serves as a demonstration of my studies and abilities and will be used as both a resume and a portfolio.
 
-A fin de navegar por las secciones de la página web, el usuario será requerido iniciar sesión o registrarse en caso de no contar con usuario o contraseña. En ambas opciones, una vez la página valide la autenticación del usuario, este será redirigido al inicio de la página web.
+There will be public items such as skills and a brief overview of certifications, as well as private items like the description of experience and contact information.
 
-Los usuarios pueden realizar las siguientes accciones:
+Users will be able to navigate through the home page and use the search function to find specific skills. They can view the skills page classified into soft and hard skills, examine the details of certifications and experience, explore the "About Me" page, and use the contact form to leave a message. People who are not registered will only have access to the skills, the certification titles, places of employment, and the "About Me" page. To access the complete information, they need to register. The admin user can add, modify, and delete skills, certifications, and respond to messages left via the contact form.
 
-Publicar instrumentos musicales
-Visualizar instrumentos musicales publicados, los cuales están distribuidos en las secciones "Guitarras", "Bajos", "Pedales", "Amplificadores", "Teclados" y "Otros"
-Comentar instrumentos musicales
-Editar el perfil de Usuario
-Cambiar la contraseña de Usuario
-Cerrar Sesión
-Login en caso de haber cerrado sesión
-Nota: La opción de editar y eliminar instrumentos musicales solo le está permitido al autor de la publicación del instrumento.
+---
 
-Tecnología Utilizada
-Front-End
-HTML 5
-CSS 3
-Javascript ES6
-Bootstrap 5.2
-Back-End
-Python 3.10.4
-Django 4.0
-Pruebas Realizadas
-Ver archivo titulado "Pruebas Proyecto Python CH.xlsx" el cual se encuentra en el presente repositorio https://github.com/johannesgperez/ProyectoFinalMain.git
+### Front-End used
+*HTML 5*
+*CSS 3*
+*Javascript ES6*
+*Bootstrap 5.2*
 
-Video Demostración
+
+### Back-End used
+*Python 3.10.4*
+*Django 4.0*
+
+---
+
+### Test cases
+Please refer to the .xlsx file in the repository:  https://github.com/floorii18/FinalProject/
+
+---
+
+### Video
+You will find three short videos:
+1st: What a person can see without logging in.
+2nd: What a registered person can see and do.
+3rd: What a superuser can do.
