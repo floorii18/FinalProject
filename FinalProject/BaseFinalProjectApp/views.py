@@ -155,3 +155,51 @@ class contact_view(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+def Certifications(request):
+     certifications = Certification.objects.all() 
+     return render(request,'certifications.html')
+ 
+def addCertification(request):
+    if request.method == "POST":
+        form = CertificationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('certifications')
+    else:
+        form = CertificationForm()
+
+    return render(request, 'addCertification.html', {'form': form})
+
+def deleteCertification(request, Certification_title):
+    certifications = Certification.objects.get(title=Certification_title)
+    certifications.delete()
+    
+    certifications = Certification.objects.all()
+    context = {"certifications" : certifications}
+    
+    return render(request, "certifications.html", context)
+
+def updateCertification(request, Certification_title):
+    
+    certifications = Certification.objects.get(title=Certification_title)
+    
+    if request.method == 'POST':
+        form = Certification(request.POST)
+        print(form)
+        
+        if form.is_valid:
+            information = form.cleaned_data
+            certifications.title = information['title']
+            certifications.description = information['description']
+            certifications.image = information['image']
+            form.save()
+            
+        return render(request, 'certifications.html')
+    
+    else:
+        form = CertificationForm(initial={'title' : certifications.title,
+                                          'description' : certifications.description, 
+                                          'image' : certifications.image})
+        
+    return render(request, 'updateCertifications.html', {"form" : form, "Certification_title" : Certification_title})

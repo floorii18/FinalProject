@@ -32,3 +32,8 @@ class ContactFormModelForm(forms.ModelForm):
      class Meta:
         model = ContactForm
         fields = ['name', 'email', 'subject', 'message']
+        
+class CertificationForm(forms.ModelForm):
+        class Meta:
+         model = Certification
+         fields = ['title', 'description', 'image']

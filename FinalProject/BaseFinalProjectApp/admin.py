@@ -3,3 +3,4 @@ from .models import *
 
 admin.site.register(SoftSkills)
 admin.site.register(HardSkills)
+admin.site.register(Certification)

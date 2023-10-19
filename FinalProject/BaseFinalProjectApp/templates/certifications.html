@@ -2,85 +2,25 @@
 
 {% block content %}
 {% load static %}
-          <li data-page-no="3" class="px-3">
-            <div class="position-relative page-width-1 page-right tm-border-top tm-border-bottom">
-              <div class="circle intro-circle-1"></div>
-              <div class="circle intro-circle-2"></div>
-              <div class="circle intro-circle-3"></div>
-              <div class="circle intro-circle-4"></div>
-              <div class="tm-bg-dark content-pad">
-                <h2 class="mb-4 text-center">Certifications</h2>
-                <ul>
-                  <div class="table-responsive">
-                    <table class="table table-borderless table-dark table-striped">
-                 <thead>
-                    <tr>
-                      <th scope="col" class="mb-4 text-center" style="width:400px"><h2 class="mb-4 text-center">Title</h2></th>
-                      <th scope="col" class="mb-4 text-center"><h2 class="mb-4 text-center">Progress</h2></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                    <td><a class="icon-link" style="color:white" href="https://www.coderhouse.com/certificados/639b79cca7eacb000f20bde4?lang=es">
-                      Python
-                    </a></td>
-                    <td><div class="progress">
-                       <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">100% completed</div>
-                     </div></td>
-                    </tr>
-                    <tr>
-                      <td><a class="icon-link"  style="color:#878585" href="https://www.linkedin.com/in/florenciaintile/details/certifications/1635544068426/single-media-viewer/?profileId=ACoAACbApFkBjyhEPXQ7IGgx0JaTWoIwOWwugak">
-                        Remote Worker Professional Certification
-                      </a></td>
-                       <td><div class="progress">
-                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">100% completed</div>
-                       </div></td>
-                      </tr>
-                      <tr>
-                        <td><a class="icon-link" style="color:white" href="https://www.credly.com/badges/dde1a43d-d0cb-4e43-b28b-8f4b80b4eb03/public_url">
-                          Scrum Foundation
-                        </a></td>
-                        <td><div class="progress">
-                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">100% completed</div>
-                       </div></td>
-                      </tr>
-                   <tr>
-                    <td><a class="icon-link" style="color:#878585" href="https://www.coderhouse.com/certificados/639b79cca7eacb000f20bde4?lang=es">
-                      QA Manual Tester
-                    </a></td>
-                    <td><div class="progress">
-                     <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">100% completed</div>
-                   </div></td>
-                    </tr>
-                    <tr>
-                      <td style="color:white">Bank Assistant</td>
-                      <td><div class="progress">
-                       <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">100% completed</div>
-                     </div></td>
-                      </tr>
-                      <tr>
-                        <td style="color:#878585">Business Administration</td>
-                        <td><div class="progress">
-                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">100% completed</div>
-                       </div></td>
-                      </tr>
-                      <tr>
-                        <td style="color:white">Civil Engineering</td>
-                        <td><div class="progress">
-                         <div class="progress-bar bg-warning" role="progressbar" style="width: 40%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">40% completed</div>
-                       </div></td>
-                      </tr>
-                 
-                    </tbody>
-               </table>
-               </div>
-              </ul>
-              <p class="lead text-secondary text-center"> 
-                Press over the Title to see the Certification</p>
-                <p class="lead text-secondary text-center"> 
-                  (available only for the first ones)</p>
-              </div>              
-            </div>
-          </li>
-         
-    {% endblock content %}
+<li data-page-no="3" class="px-3">
+    <div class="position-relative page-width-1 page-left tm-border-top tm-border-bottom">
+      <div class="circle intro-circle-1"></div>
+      <div class="circle intro-circle-2"></div>
+      <div a="circle intro-circle-3"></div>
+      <div class="circle intro-circle-4"></div>
+      <div class="tm-bg-dark content-pad">
+        <h2 class="mb-4 text-center">{{ certification.title }}</h2>
+        <ul>
+          <p class="lead text-center"><img src="{% static 'img/comingsoon.png' %}" width="40" height="40" class="avatar-img"></p>
+          <p class="lead text-center">{{ certification.description }}</p>
+          <li>{% if user.is_superuser %} <button style="background-color: transparent; border: none; padding: 0;">
+            <a href="{% url 'addcertifications' %}" style="text-decoration: none;">
+              <img src="https://i.postimg.cc/htsSPSLt/Photo-Room-20231008-152508.png" alt="" width="25" height="25"></a>
+            <a href="{% url 'updatecertifications' certification.description %}">✏️</a>
+            <a href="{% url 'deletecertifications' certification.description %}">🗑️</a>
+          </button>{% endif %}</li>
+        </ul>
+      </div>
+    </div>
+  </li>
+{% endblock content %}
