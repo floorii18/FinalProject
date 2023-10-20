@@ -2,6 +2,7 @@
 
 {% block content %}
 {% load static %}
+{% for certification in certifications %}
 <li data-page-no="3" class="px-3">
     <div class="position-relative page-width-1 page-left tm-border-top tm-border-bottom">
       <div class="circle intro-circle-1"></div>
@@ -11,16 +12,22 @@
       <div class="tm-bg-dark content-pad">
         <h2 class="mb-4 text-center">{{ certification.title }}</h2>
         <ul>
-          <p class="lead text-center"><img src="{% static 'img/comingsoon.png' %}" width="40" height="40" class="avatar-img"></p>
+          <p class="lead text-center"><img src="{% static 'certifications/comingsoon.png' %}" width="" height="" class="img"></p>
           <p class="lead text-center">{{ certification.description }}</p>
-          <li>{% if user.is_superuser %} <button style="background-color: transparent; border: none; padding: 0;">
-            <a href="{% url 'addcertifications' %}" style="text-decoration: none;">
-              <img src="https://i.postimg.cc/htsSPSLt/Photo-Room-20231008-152508.png" alt="" width="25" height="25"></a>
-            <a href="{% url 'updatecertifications' certification.description %}">✏️</a>
-            <a href="{% url 'deletecertifications' certification.description %}">🗑️</a>
-          </button>{% endif %}</li>
+          <li>
+            {% if user.is_superuser %}
+                <button style="background-color: transparent; border: none; padding: 0;">
+                    <a href="{% url 'addcertification' %}" style="text-decoration: none;">
+                        <img src="https://i.postimg.cc/htsSPSLt/Photo-Room-20231008-152508.png" alt="" width="25" height="25">
+                    </a>
+                    <a href="{% url 'updatecertification' certification.title %}">✏️</a>
+                    <a href="{% url 'deletecertification' certification.title %}">🗑️</a>
+                </button>
+            {% endif %}
+        </li>
         </ul>
       </div>
     </div>
   </li>
+{% endfor %}
 {% endblock content %}

@@ -157,32 +157,33 @@ class contact_view(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
 def Certifications(request):
-     certifications = Certification.objects.all() 
-     return render(request,'certifications.html')
+    certifications = Certification.objects.all()
+    context = {"certifications": certifications}
+    return render(request, 'certifications.html', context)
  
-def addCertification(request):
+def AddCertification(request):
     if request.method == "POST":
-        form = CertificationForm(request.POST)
+        form = CertificationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('certifications')
     else:
         form = CertificationForm()
+    context = {"form": form}
+    return render(request, 'addCertification.html', context)
 
-    return render(request, 'addCertification.html', {'form': form})
-
-def deleteCertification(request, Certification_title):
-    certifications = Certification.objects.get(title=Certification_title)
-    certifications.delete()
+def DeleteCertification(request, certification_title):
+    certification = Certification.objects.get(title=certification_title)
+    certification.delete()
     
-    certifications = Certification.objects.all()
-    context = {"certifications" : certifications}
+    certification = Certification.objects.all()
+    context = {"certification" : certification}
     
     return render(request, "certifications.html", context)
 
-def updateCertification(request, Certification_title):
+def UpdateCertification(request, certification_title):
     
-    certifications = Certification.objects.get(title=Certification_title)
+    certification = Certification.objects.get(title=certification_title)
     
     if request.method == 'POST':
         form = Certification(request.POST)
@@ -190,16 +191,16 @@ def updateCertification(request, Certification_title):
         
         if form.is_valid:
             information = form.cleaned_data
-            certifications.title = information['title']
-            certifications.description = information['description']
-            certifications.image = information['image']
+            certification.title = information['title']
+            certification.description = information['description']
+            certification.image = information['image']
             form.save()
             
         return render(request, 'certifications.html')
     
     else:
-        form = CertificationForm(initial={'title' : certifications.title,
-                                          'description' : certifications.description, 
-                                          'image' : certifications.image})
+        form = CertificationForm(initial={'title' : certification.title,
+                                          'description' : certification.description, 
+                                          'image' : certification.image})
         
-    return render(request, 'updateCertifications.html', {"form" : form, "Certification_title" : Certification_title})
+    return render(request, 'updateCertifications.html', {"form" : form, "certification_title" : certification_title})
