@@ -4,7 +4,7 @@
 {% load static %}
 {% for certification in certifications %}
 <li data-page-no="3" class="px-3">
-    <div class="position-relative page-width-1 page-left tm-border-top tm-border-bottom">
+  <div class="position-relative page-width-1 {% cycle 'page-left' 'page-right' %} tm-border-top tm-border-bottom">
       <div class="circle intro-circle-1"></div>
       <div class="circle intro-circle-2"></div>
       <div class="circle intro-circle-3"></div>
@@ -12,7 +12,7 @@
       <div class="tm-bg-dark content-pad">
         <h2 class="mb-4 text-center">{{ certification.title }}</h2>
         <ul>
-          <p class="lead text-center"><img src="{{certifications_url}}" width="" height="" class="img"></p>
+          <p class="lead text-center"><img src="{{certification.image.url}}" style="max-width: 100%;" class="img" alt="{{ certification.title }}"></p>
           <p class="lead text-center">{{ certification.description }}</p>
           <li>
             {% if user.is_superuser %}
@@ -20,8 +20,8 @@
                     <a href="{% url 'addcertification' %}" style="text-decoration: none;">
                         <img src="https://i.postimg.cc/htsSPSLt/Photo-Room-20231008-152508.png" alt="" width="25" height="25">
                     </a>
-                    <a href="{% url 'updatecertification' certification.title %}">✏️</a>
-                    <a href="{% url 'deletecertification' certification.title %}">🗑️</a>
+                    <a href="{% url 'updatecertification' certification.id %}">✏️</a>
+                    <a href="{% url 'deletecertification' certification.id %}">🗑️</a>
                 </button>
             {% endif %}
         </li>

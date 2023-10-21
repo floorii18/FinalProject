@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import SoftSkills, HardSkills
 from .forms import *
 from django.urls import reverse_lazy
@@ -162,49 +162,29 @@ def Certifications(request):
     return render(request, 'certifications.html', context)
  
 def AddCertification(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = CertificationForm(request.POST, request.FILES)
         if form.is_valid():
-            certification = Certification.objects.get_or_create()
-            new_image = form.cleaned_data["image"]
-            if new_image:
-                certification.image = new_image
-                certification.save()
+            print(form)
             form.save()
             return redirect('certifications')
     else:
         form = CertificationForm()
-    context = {"form": form}
-    return render(request, 'addCertification.html', context)
+    return render(request, 'addCertification.html', {'form': form})
 
-def DeleteCertification(request, certification_title):
-    certification = Certification.objects.get(title=certification_title)
+def DeleteCertification(request, pk):
+    certification = get_object_or_404(Certification, pk=pk)
     certification.delete()
-    
-    certification = Certification.objects.all()
-    context = {"certification" : certification}
-    
-    return render(request, "certifications.html", context)
+    return redirect('certifications')
 
-def UpdateCertification(request, certification_title):
+def UpdateCertification(request, pk):
     
-    certification = Certification.objects.get(title=certification_title)
-    
+    certification = Certification.objects.get(pk=pk)
     if request.method == 'POST':
-        form = CertificationForm(request.POST, request.FILES)
-        print(form)
+        form = CertificationForm(request.POST, request.FILES, instance=certification)
         if form.is_valid():
-            information = form.cleaned_data
-            certification.title = information['title']
-            certification.description = information['description']
-            certification.image = information['image']
             form.save()
-            
-        return redirect('certifications')
-    
+            return redirect('certifications')
     else:
-        form = CertificationForm(initial={'title' : certification.title,
-                                          'description' : certification.description, 
-                                          'image' : certification.image})
-        
-    return render(request, 'updateCertifications.html', {"form" : form, "certification_title" : certification_title})
+        form = CertificationForm(instance=certification)
+    return render(request, 'updateCertifications.html', {'form': form})

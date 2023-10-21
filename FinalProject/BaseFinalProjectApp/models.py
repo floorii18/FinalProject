@@ -23,9 +23,9 @@ class ContactForm(models.Model):
     response = models.TextField(blank=True, null=True)
 
 class Certification(models.Model):
-    title = models.CharField(max_length=100, unique=True)
+    title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='static/certifications/', null=True, blank = True)
-    
+    image = models.ImageField(upload_to='certifications/', null=True, blank = True)
+
     def __str__(self):
         return f"{self.image} /n {self.title} \n {self.description}"

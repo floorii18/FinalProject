@@ -12,7 +12,7 @@
               <div class="tm-bg-dark content-pad">
                 <h2 class="mb-4 text-center">Update Certification</h2>
                 <ul><div class="text-center">
-                  <form class="row" action="" method="post">
+                  <form class="row" action="" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                     {% csrf_token %}
                         {{ form.as_p }}
