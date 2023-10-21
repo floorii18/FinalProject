@@ -165,6 +165,11 @@ def AddCertification(request):
     if request.method == "POST":
         form = CertificationForm(request.POST, request.FILES)
         if form.is_valid():
+            certification = Certification.objects.get_or_create()
+            new_image = form.cleaned_data["image"]
+            if new_image:
+                certification.image = new_image
+                certification.save()
             form.save()
             return redirect('certifications')
     else:
@@ -186,17 +191,16 @@ def UpdateCertification(request, certification_title):
     certification = Certification.objects.get(title=certification_title)
     
     if request.method == 'POST':
-        form = Certification(request.POST)
+        form = CertificationForm(request.POST, request.FILES)
         print(form)
-        
-        if form.is_valid:
+        if form.is_valid():
             information = form.cleaned_data
             certification.title = information['title']
             certification.description = information['description']
             certification.image = information['image']
             form.save()
             
-        return render(request, 'certifications.html')
+        return redirect('certifications')
     
     else:
         form = CertificationForm(initial={'title' : certification.title,
