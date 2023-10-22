@@ -37,6 +37,6 @@ Please refer to the .csv link: https://docs.google.com/spreadsheets/d/1ZO5AvEEiu
 
 ### Video
 You will find three short videos:
-1st: What a person can see without logging in.
-2nd: What a registered person can see and do.
-3rd: What a superuser can do.
+1st: What a person can see without logging in. (https://drive.google.com/file/d/1rvnw4UhTlERKZEWEfqZdkpCbnT_Hyn2V/view?usp=share_link)
+2nd: What a registered person can see and do. (https://drive.google.com/file/d/171SqepOwBajgzCQ7Q5W7K-VMUAE1BFQP/view?usp=share_link)
+3rd: What a superuser can do. (https://drive.google.com/file/d/1WCbLx-mxf-CZEG4OxzcKDiRzM7I1bI2E/view?usp=share_link)

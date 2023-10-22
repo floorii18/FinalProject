@@ -104,46 +104,46 @@ def deletehardskill(request, hardskills_Description):
     return render(request, "skills.html", context)
 
 def updatesoftskill(request, softskills_Description):
-    
     softskills = SoftSkills.objects.get(Description=softskills_Description)
-    
+
     if request.method == 'POST':
         form = SoftSkillsForm(request.POST)
-        print(form)
-        
-        if form.is_valid:
+
+        if form.is_valid():
             information = form.cleaned_data
-            softskills.Description = information['Description']
-            softskills.Level = information['Level']
-            form.save()
-            
-        return render(request, 'skills.html')
-    
+            if 'Description' in information:
+                softskills.Description = information['Description']
+            if 'Level' in information:
+                softskills.Level = information['Level']
+            softskills.save()
+
+            return redirect('skills')  # Redirige a la página de habilidades después de guardar
     else:
-        form = SoftSkillsForm(initial={'Description' : softskills.Description, 'Level' : softskills.Level})
-        
-    return render(request, 'updatesoftskill.html', {"form" : form, "softskills_Desciption" : softskills_Description})
+        form = SoftSkillsForm(initial={'Description': softskills.Description, 'Level': softskills.Level})
+
+    return render(request, 'updatesoftskill.html', {"form": form, "softskills_Description": softskills_Description})
+
 
 def updatehardskill(request, hardskills_Description):
-    
     hardskills = HardSkills.objects.get(Description=hardskills_Description)
-    
+
     if request.method == 'POST':
         form = HardSkillsForm(request.POST)
-        print(form)
-        
-        if form.is_valid:
+
+        if form.is_valid():
             information = form.cleaned_data
-            hardskills.Description = information['Description']
-            hardskills.Level = information['Level']
-            form.save()
-            
-        return render(request, 'skills.html')
-    
+            if 'Description' in information:
+                hardskills.Description = information['Description']
+            if 'Level' in information:
+                hardskills.Level = information['Level']
+            hardskills.save()
+
+            return redirect('skills')  # Redirige a la página de habilidades después de guardar
     else:
-        form = HardSkillsForm(initial={'Description' : hardskills.Description, 'Level' : hardskills.Level})
-        
-    return render(request, 'updatehardskill.html', {"form" : form, "hardskills_Desciption" : hardskills_Description})
+        form = HardSkillsForm(initial={'Description': hardskills.Description, 'Level': hardskills.Level})
+
+    return render(request, 'updatehardskill.html', {"form": form, "hardskills_Description": hardskills_Description})
+
 
 def is_superuser(user):
     return user.is_superuser

@@ -4,18 +4,23 @@ from django.core.exceptions import ValidationError
 
 class SoftSkillsForm(forms.ModelForm):
     class Meta:
-	#Aquí indicamos el modelo que queremos usar.
         model = SoftSkills
-	#Aquí tenemos que pasar todas las variables con las que cuenta nuestro modelo.
         fields = ['Description', 'Level']
-
     
+    def __init__(self, *args, **kwargs):
+        super(SoftSkillsForm, self).__init__(*args, **kwargs)
+        self.fields['Description'].required = False
+        self.fields['Level'].required = False
+
 class HardSkillsForm(forms.ModelForm):
     class Meta:
-	#Aquí indicamos el modelo que queremos usar.
         model = HardSkills
-	#Aquí tenemos que pasar todas las variables con las que cuenta nuestro modelo.
         fields = ['Description', 'Level']
+    
+    def __init__(self, *args, **kwargs):
+        super(HardSkillsForm, self).__init__(*args, **kwargs)
+        self.fields['Description'].required = False
+        self.fields['Level'].required = False
         
 class SoftSkillSearch(forms.ModelForm):
 
