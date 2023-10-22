@@ -15,26 +15,17 @@
                 <form method="post" class="contact-form">
                     {% csrf_token %}
                     <div class="input-group tm-mb-30">
-                        <input name="name" type="text" class="form-control rounded-0 border-top-0 border-end-0 border-start-0" placeholder="Name">
-                    </div>
-                    <div class="input-group tm-mb-30">
-                        <input name="email" type="text" class="form-control rounded-0 border-top-0 border-end-0 border-start-0" placeholder="Email">
-                    </div>
-                    <div class="input-group tm-mb-30">
-                        <textarea rows="5" name="subject" class="textarea form-control rounded-0 border-top-0 border-end-0 border-start-0" placeholder="Subject"></textarea>
-                    </div>
-                    <div class="input-group tm-mb-30">
-                        <textarea rows="5" name="message" class="textarea form-control rounded-0 border-top-0 border-end-0 border-start-0" placeholder="Message"></textarea>
+                        {{ form.as_p }}
                     </div>
                     <div class="input-group justify-content-end">
                         <input type="submit" class="btn btn-primary tm-btn-pad-2" value="Send">
                     </div>
                 </form>
             </div>
-            <div class="col-md-6 tm-contact-right">                  
+            <div class="col-md-6 tm-contact-right">
                 <p class="mb-4">
-                    Welcome to my contact page! I'm excited to hear from you. 
-                    Please fill out the form with your name, email, and your message. 
+                    Welcome to my contact page! I'm excited to hear from you.
+                    Please fill out the form with your name, email, and your message.
                     I'll get back to you as soon as possible. Your feedback is important to me.
                 </p>
                 <div>
@@ -53,49 +44,51 @@
                 </div>
             </div>
         </div>
-    </div>            
+    </div>
 </li>
 <li data-page-no="4">
     <div class="container">
         <h2 class="mb-4">Your message</h2>
-        <ul>
-            {% for messages in messages %}
-                <p><strong>Name:</strong> {{ message.name }}</p>
-                <p><strong>Email:</strong> {{ message.email }}</p>
-                <p><strong>Subject:</strong> {{ message.subject }}</p>
-                <p><strong>Message:</strong> {{ message.message }}</p>
-                <p><strong>Date:</strong> {{ message.date }}</p>
-            {% empty %}
+        <ul> {% if messages %}
+                {% for message in messages %}
+                <li>
+                    <p><strong>From:</strong> {{ message.name }}</p>
+                    <p><strong>Email:</strong> {{ message.email }}</p>
+                    <p><strong>Subject:</strong> {{ message.subject }}</p>
+                    <p><strong>Message:</strong> {{ message.message }}</p>
+                    <p><strong>Date:</strong> {{ message.date }}</p>
+                </li>
+                {% endfor %}
+            {% endif %}
+            {% if not messages %}
                 <li>No messages yet.</li>
-            {% endfor %}
+            {% endif %}
         </ul>
-      </div>
+    </div>
 </li>
 {% endif %}
 
-{% if not user.is_authenticated %}%
+{% if not user.is_authenticated %}
 <div class="container-fluid tm-content-container">
     <ul class="cd-hero-slider mb-0 py-5">
-      <li class="px-3" data-page-no="1">
-        <div class="page-width-1 page-left">
-          <div class="d-flex position-relative tm-border-top tm-border-bottom intro-container">
-            <div class="intro-left tm-bg-dark">
-            <ul>
-                <p class="lead text-secondary text-center">You need to log in to gain access to this information.</p>
-                
-                <button style="background-color: transparent; border: none; padding: 0;">
-                    <a href="{% url 'home' %}" style="text-decoration: none;">
-                     Go home</a>
-                  </button>   
-            </div>           
-            <div class="circle intro-circle-1"></div>
-            <div class="circle intro-circle-2"></div>
-            <div class="circle intro-circle-3"></div>
-            <div class="circle intro-circle-4"></div> 
-          </div>
+        <li class="px-3" data-page-no="1">
+            <div class="page-width-1 page-left">
+                <div class="d-flex position-relative tm-border-top tm-border-bottom intro-container">
+                    <div class="intro-left tm-bg-dark">
+                        <p class="lead text-secondary text-center">You need to log in to gain access to this information.</p>
+                        <button style="background-color: transparent; border: none; padding: 0;">
+                            <a href="{% url 'home' %}" style="text-decoration: none;">Go home</a>
+                        </button>
+                    </div>
+                    <div class="circle intro-circle-1"></div>
+                    <div class="circle intro-circle-2"></div>
+                    <div class="circle intro-circle-3"></div>
+                    <div class="circle intro-circle-4"></div>
+                </div>
+            </div>
         </li>
-      </ul>
-    </div>
+    </ul>
+</div>
 {% endif %}
 
 {% if user.is_superuser %}
@@ -103,19 +96,19 @@
     <div class="container">
         <h2 class="mb-4">Messages</h2>
         <ul>
-          {% for message in messages %}
-            <li>
-              <p><strong>Name:</strong> {{ message.name }}</p>
-              <p><strong>Email:</strong> {{ message.email }}</p>
-              <p><strong>Subject:</strong> {{ message.subject }}</p>
-              <p><strong>Message:</strong> {{ message.message }}</p>
-              <p><strong>Date:</strong> {{ message.date }}</p>
-            </li>
-          {% empty %}
-            <li>No messages yet.</li>
-          {% endfor %}
+            {% for message in messages %}
+                <li>
+                    <p><strong>Name:</strong> {{ message.name }}</p>
+                    <p><strong>Email:</strong> {{ message.email }}</p>
+                    <p><strong>Subject:</strong> {{ message.subject }}</p>
+                    <p><strong>Message:</strong> {{ message.message }}</p>
+                    <p><strong>Date:</strong> {{ message.date }}</p>
+                </li>
+            {% empty %}
+                <li>No messages yet.</li>
+            {% endfor %}
         </ul>
-      </div>
+    </div>
 </li>
 {% endif %}
-    {% endblock content %}
+{% endblock content %}

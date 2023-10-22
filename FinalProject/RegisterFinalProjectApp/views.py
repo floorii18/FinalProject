@@ -32,7 +32,7 @@ def login_request(request):
 def register(request):
 
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
 
             username = form.cleaned_data['username']
@@ -40,7 +40,7 @@ def register(request):
             return redirect('login')
 
     else:    
-        form = UserRegisterForm()    
+        form = CustomUserCreationForm()    
 
     return render(request,"signin.html" ,  {"form":form})
 
@@ -49,7 +49,7 @@ def updateprofile(request):
     user = request.user
 
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user.email = form.cleaned_data['email']
             user.last_name = form.cleaned_data['last_name']
@@ -60,7 +60,7 @@ def updateprofile(request):
         else:
             return render(request, "updateprofile.html", {"form": form, "Users": user})
     else:
-        form = UserRegisterForm(
+        form = CustomUserCreationForm(
             initial={
                 'email': user.email,
                 'last_name': user.last_name,

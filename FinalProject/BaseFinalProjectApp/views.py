@@ -1,10 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import CreateView
-from RegisterFinalProjectApp.models import Avatar
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages as django_messages
 
 
 def Home(request):
@@ -152,24 +150,23 @@ def is_superuser(user):
 
 @login_required
 def contact_view(request):
+    form = ContactFormModelForm(request.POST or None)
     context ={}
-    
+
     if request.method == 'POST':
-        form = ContactFormModelForm(request.POST)
         if form.is_valid():
             form.instance.user = request.user
             form.save()
-            messages.success(request, 'Message sent successfully.')
-    else:
-        form = ContactFormModelForm()
+            django_messages.success(request, 'Message sent successfully.')
+            form = ContactFormModelForm()
 
     if request.user.is_superuser:
         messages = ContactForm.objects.all()
     else:
         messages = ContactForm.objects.filter(user=request.user)
-        
-        context={'form': form,
-                 'messages': messages}
+
+    context={'form': form,
+             'messages': messages}
 
     return render(request, 'contact.html', context)
 
