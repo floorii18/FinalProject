@@ -31,7 +31,7 @@ Users will be able to navigate through the home page and use the search function
 ---
 
 ### Test cases
-Please refer to the .xlsx file in the repository:  https://github.com/floorii18/FinalProject/
+Please refer to the .csv link: https://docs.google.com/spreadsheets/d/1ZO5AvEEiuNkSVRnL2ZQjSHhfiZGEB0s6_kts0hP4Dzc/edit?usp=sharing
 
 ---
 
