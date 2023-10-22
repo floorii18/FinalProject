@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import SoftSkills, HardSkills
+from .models import *
 from .forms import *
-from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from RegisterFinalProjectApp.models import Avatar
+from django.contrib.auth.decorators import login_required
+
 
 def Home(request):
 
@@ -146,16 +147,32 @@ def updatehardskill(request, hardskills_Description):
         
     return render(request, 'updatehardskill.html', {"form" : form, "hardskills_Desciption" : hardskills_Description})
 
-class contact_view(LoginRequiredMixin, CreateView):
-    model = ContactForm
-    form_class = ContactFormModelForm
-    success_url = reverse_lazy('contact')
-    template_name = 'contact.html'
+def is_superuser(user):
+    return user.is_superuser
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+@login_required
+def contact_view(request):
+    context ={}
     
+    if request.method == 'POST':
+        form = ContactFormModelForm(request.POST)
+        if form.is_valid():
+            form.instance.user = request.user
+            form.save()
+            messages.success(request, 'Message sent successfully.')
+    else:
+        form = ContactFormModelForm()
+
+    if request.user.is_superuser:
+        messages = ContactForm.objects.all()
+    else:
+        messages = ContactForm.objects.filter(user=request.user)
+        
+        context={'form': form,
+                 'messages': messages}
+
+    return render(request, 'contact.html', context)
+
 def Certifications(request):
     certifications = Certification.objects.all()
     context = {"certifications": certifications}

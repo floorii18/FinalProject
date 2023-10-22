@@ -2,7 +2,7 @@
 
 {% block content %}
 {% load static %}
-{% if user.is_authenticated %}
+{% if user.is_authenticated and not user.is_superuser %}
 <li data-page-no="4">
     <div class="mx-auto page-width-2">
         <div class="row">
@@ -55,7 +55,25 @@
         </div>
     </div>            
 </li>
-{% else %}
+<li data-page-no="4">
+    <div class="container">
+        <h2 class="mb-4">Your message</h2>
+        <ul>
+            {% for messages in messages %}
+                <p><strong>Name:</strong> {{ message.name }}</p>
+                <p><strong>Email:</strong> {{ message.email }}</p>
+                <p><strong>Subject:</strong> {{ message.subject }}</p>
+                <p><strong>Message:</strong> {{ message.message }}</p>
+                <p><strong>Date:</strong> {{ message.date }}</p>
+            {% empty %}
+                <li>No messages yet.</li>
+            {% endfor %}
+        </ul>
+      </div>
+</li>
+{% endif %}
+
+{% if not user.is_authenticated %}%
 <div class="container-fluid tm-content-container">
     <ul class="cd-hero-slider mb-0 py-5">
       <li class="px-3" data-page-no="1">
@@ -66,13 +84,10 @@
                 <p class="lead text-secondary text-center">You need to log in to gain access to this information.</p>
                 
                 <button style="background-color: transparent; border: none; padding: 0;">
-                    <a href="{% url 'experience' %}" style="text-decoration: none;">
-                     Go back</a>
+                    <a href="{% url 'home' %}" style="text-decoration: none;">
+                     Go home</a>
                   </button>   
-            </div>  
-            <div class="intro-right">
-              <img src="https://halopowered.com/navigation-assets/halo-logo-red.svg" alt="" width="100" height="100">
-            </div>         
+            </div>           
             <div class="circle intro-circle-1"></div>
             <div class="circle intro-circle-2"></div>
             <div class="circle intro-circle-3"></div>
@@ -81,5 +96,26 @@
         </li>
       </ul>
     </div>
+{% endif %}
+
+{% if user.is_superuser %}
+<li data-page-no="4">
+    <div class="container">
+        <h2 class="mb-4">Messages</h2>
+        <ul>
+          {% for message in messages %}
+            <li>
+              <p><strong>Name:</strong> {{ message.name }}</p>
+              <p><strong>Email:</strong> {{ message.email }}</p>
+              <p><strong>Subject:</strong> {{ message.subject }}</p>
+              <p><strong>Message:</strong> {{ message.message }}</p>
+              <p><strong>Date:</strong> {{ message.date }}</p>
+            </li>
+          {% empty %}
+            <li>No messages yet.</li>
+          {% endfor %}
+        </ul>
+      </div>
+</li>
 {% endif %}
     {% endblock content %}

@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
     
 class SoftSkills(models.Model):
     Description=models.CharField(max_length=50, unique=True)
@@ -20,7 +23,13 @@ class ContactForm(models.Model):
     subject = models.CharField(max_length=100)
     message = models.TextField(blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
-    response = models.TextField(blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    
+    class Meta:
+        ordering = ['-date']
+
+    def __str__(self):
+        return '%s - %s' % (self.name, self.message)
 
 class Certification(models.Model):
     title = models.CharField(max_length=100)
